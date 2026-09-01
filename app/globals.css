@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1A0A10;
+  --foreground: #F5E6E6;
+  --card-bg: #2D1F2F;
+  --accent-pink: #FF6B9D;
+  --accent-terracotta: #FF8E5E;
+  --tape-pink: rgba(255, 107, 157, 0.6);
+  --tape-yellow: rgba(255, 183, 193, 0.6);
+  --gold: #FFD700;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
