@@ -110,24 +110,35 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  // Calculate time since relationship started
+  // Set fixed counter values with live seconds counting
   useEffect(() => {
-    const startDate = new Date('2026-07-03T00:00:00');
+    // Initial values: 59 days, 20 hours, 40 minutes, 0 seconds
+    let seconds = 0;
+    let minutes = 40;
+    let hours = 20;
+    let days = 59;
     
-    const updateTime = () => {
-      const now = new Date();
-      const diff = now.getTime() - startDate.getTime();
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    // Set initial values immediately
+    setTimeLeft({ days, hours, minutes, seconds });
+    
+    const interval = setInterval(() => {
+      seconds++;
+      if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+      }
+      if (minutes >= 60) {
+        minutes = 0;
+        hours++;
+      }
+      if (hours >= 24) {
+        hours = 0;
+        days++;
+      }
       
       setTimeLeft({ days, hours, minutes, seconds });
-    };
+    }, 1000);
     
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
