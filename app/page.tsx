@@ -237,12 +237,9 @@ export default function Home() {
                 <Gift size={80} className="mx-auto text-[#FF6B9D]" />
               </motion.div>
               
-              <h1 className="text-2xl md:text-5xl font-caveat text-white mb-3">
+              <h1 className="text-2xl md:text-5xl font-caveat text-white mb-6">
                 Karıma Özel
               </h1>
-              <p className="text-lg md:text-2xl text-white/80 mb-6 font-caveat">
-                Gülcan ❤️ Said
-              </p>
               
               {!showPasswordInput ? (
                 <motion.button
