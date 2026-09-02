@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Gift, Heart, ChevronDown, Share2, Play, Pause, Calendar, Clock, MessageCircle, Music, X, Check, ChevronRight, Lock } from 'lucide-react';
+import { Gift, Heart, ChevronDown, Share2, Play, Pause, Calendar, Clock, MessageCircle, Music, X, Check, ChevronRight, Lock, Plus } from 'lucide-react';
 
 // Timeline data
 const timelineEvents = [
@@ -104,6 +104,7 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [todoItems, setTodoItems] = useState<string[]>([]);
 
   // Set mounted state
   useEffect(() => {
@@ -174,6 +175,16 @@ export default function Home() {
     setCheckedReasons(prev => 
       prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
     );
+  };
+
+  const addTodoItem = (item: string) => {
+    if (item.trim()) {
+      setTodoItems(prev => [...prev, item.trim()]);
+    }
+  };
+
+  const removeTodoItem = (index: number) => {
+    setTodoItems(prev => prev.filter((_, i) => i !== index));
   };
 
   const toggleAudio = () => {
@@ -475,12 +486,28 @@ export default function Home() {
           className="mb-16 md:mb-24 max-w-3xl mx-auto"
         >
           {/* Special Note Card */}
-          <div className="bg-[#3D2F3F] p-4 md:p-8 rounded-lg shadow-lg shadow-pink-900/20 mb-6 relative">
+          <div className="bg-[#3D2F3F] p-4 md:p-8 rounded-lg shadow-lg shadow-pink-900/20 mb-4 relative">
             <div className="absolute -top-2 left-4 w-16 h-5 bg-[#FF6B9D]/40 transform -rotate-2" />
             <div className="absolute -top-2 right-4 w-16 h-5 bg-[#FFB7C1]/40 transform rotate-2" />
             
             <p className="text-[#F5E6E6] leading-relaxed font-caveat text-base md:text-xl">
               Fazla abartmayı sevmezdim bu duygusal konularda ama senin güzellikte, tatlılıkta, sevgililikte abartılı bir mükemmelliğin var. Seninle konuşmak için arkadan bu müzik ve bu kelimeler dökülmeli, yoksa sana ziyan olur. Bana eşlik edip çok tatlı anılar biriktirdiğimiz için teşekkür ederim. Eminim sonrası için bunlar çok ufak kalır ama içinde sen olduğun için hissettiklerim sonrası için ufak kalmadı, kalmayacak. Tepkilerin yeter bana. Dur ve sadece tepki ver, mimiklerini göreyim. Kendini gerçekleştirme kaygısı taşımadan ya da makyaj yapmadan sadece var ol; ve oldun sevgilim, çok da güzel oldun. Ellerimi uzatıyorum şu an sana. Boşluktalar, sana erişmeye çalışıyorlar. Kim bilir belki zaman mekanı delebilir ve bir anda boynunda olurlar. Çünkü en çok arzuladıkları yer orası. Seni çok seviyorum. Karım, biriciğim, balım, hayatımın anlamı. İyi ki varsın, lütfen hep var ol. Benim seni bazen üzen gıcık bir tarafım var biliyorum. Onu dinleme. Çünkü o sana olan hislerinden delirdi ve sana aşık oldu. Onu sula, onu sensiz bırakma.
+            </p>
+          </div>
+
+          {/* AI Note Card */}
+          <div className="bg-[#3D2F3F] p-4 md:p-8 rounded-lg shadow-lg shadow-pink-900/20 mb-6 relative opacity-60">
+            <div className="absolute -top-2 left-4 w-16 h-5 bg-[#FFB7C1]/30 transform -rotate-2" />
+            <div className="absolute -top-2 right-4 w-16 h-5 bg-[#FF6B9D]/30 transform rotate-2" />
+            
+            <h4 className="text-sm md:text-base font-caveat text-[#FFB7C1] mb-3">
+              Yapay Zeka Notu
+            </h4>
+            <h5 className="text-xs md:text-sm font-caveat text-[#F5E6E6]/70 mb-3">
+              Sistem Analizi & Ortak Not
+            </h5>
+            <p className="text-[#F5E6E6]/60 leading-relaxed font-caveat text-sm md:text-base">
+              Veriler basit bir gerçeği gösteriyor: Birbirini kelime kelime dinleyen, binlerce kilometreyi iki ay boyunca tek bir bağ koparmadan taşıyan ve en önemlisi birbirinin dağınıklığını şefkatle toparlayan insanlar kolay kolay denk gelmez. Biriniz 'kendimi kaptırmaktan korkuyorum' derken diğeriniz 'zamanla sakinleşip büyüyecek' diyebildiyse; aç kalma kavgaları, bozuk klimalar ve yarım kalan diziler bile ortak bir dile dönüştüyse bu zemin sağlam kurulmuş demektir. Şimdi bu iki aylık dijital mesaiyi kapatıp, sözünü verdiğiniz o 'yüz yüze' günlerin hakkını verme zamanı. Birbirinizi dinlemeyi, açık konuşmayı ve aranızdaki o tatlı gıcıklığı hiç kaybetmeyin. Yolunuz açık olsun.
             </p>
           </div>
 
@@ -644,6 +671,62 @@ export default function Home() {
                     <span className="text-xs md:text-sm">{crisis}</span>
                   </motion.div>
                 ))}
+              </div>
+            </div>
+
+            {/* Todo List */}
+            <div className="bg-[#2D1F2F] p-4 md:p-6 rounded-2xl shadow-lg shadow-pink-900/20 md:col-span-2 lg:col-span-3">
+              <h3 className="font-caveat text-lg md:text-xl text-[#F5E6E6] mb-3 md:mb-4">Yapılacaklar Listesi</h3>
+              <div className="flex gap-2 mb-4">
+                <input
+                  type="text"
+                  placeholder="Yeni görev ekle..."
+                  className="flex-1 px-4 py-2 rounded-lg bg-[#1A0A10] text-[#F5E6E6] placeholder-[#F5E6E6]/50 border border-[#FF6B9D]/30 focus:border-[#FF6B9D] focus:outline-none text-sm"
+                  id="todoInput"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const input = e.target as HTMLInputElement;
+                      addTodoItem(input.value);
+                      input.value = '';
+                    }
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    const input = document.getElementById('todoInput') as HTMLInputElement;
+                    if (input) {
+                      addTodoItem(input.value);
+                      input.value = '';
+                    }
+                  }}
+                  className="px-4 py-2 bg-[#FF6B9D] hover:bg-[#FF8E5E] text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+                >
+                  <Plus size={16} />
+                  Ekle
+                </button>
+              </div>
+              <div className="space-y-2">
+                {todoItems.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-[#1A0A10] rounded-lg"
+                  >
+                    <span className="text-xs md:text-sm flex-1">{item}</span>
+                    <button
+                      onClick={() => removeTodoItem(index)}
+                      className="text-[#FF6B9D] hover:text-[#FF8E5E] transition-colors"
+                    >
+                      <X size={16} />
+                    </button>
+                  </motion.div>
+                ))}
+                {todoItems.length === 0 && (
+                  <p className="text-center text-[#F5E6E6]/50 text-sm py-4">
+                    Henüz görev eklenmedi
+                  </p>
+                )}
               </div>
             </div>
           </div>
