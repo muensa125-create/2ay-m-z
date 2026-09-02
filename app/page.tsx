@@ -613,7 +613,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-xs md:text-sm font-bold text-[#FF8E5E] mb-2">Said:</h4>
                   <div className="flex flex-wrap gap-1 md:gap-2">
-                    {['tatlım', 'şapşal', 'su iç', 'öpüyorum', 'kdlcldlc', 'aklım kalıyor', 'ye artık', 'ikimizede istiyorum'].map((word, i) => (
+                    {['tatlım', 'şapşal', 'su iç', 'öpüyorum', 'kdlcldlc', 'aklım kalıyor', 'ye artık', 'istiyorum'].map((word, i) => (
                       <span key={i} className="bg-[#2D1F2F] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">{word}</span>
                     ))}
                   </div>
@@ -621,7 +621,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-xs md:text-sm font-bold text-[#FF6B9D] mb-2">Gülcan:</h4>
                   <div className="flex flex-wrap gap-1 md:gap-2">
-                    {['askim', 'sapsal', 'acim', 'spora gidiyom', 'hayat bitti', 'tsklerrr', 'yerim seni', 'ikimizede istiyorum'].map((word, i) => (
+                    {['askim', 'sapsal', 'acim', 'spora gidiyom', 'hayat bitti', 'tsklerrr', 'yerim seni', 'istiyorum'].map((word, i) => (
                       <span key={i} className="bg-[#2D1F2F] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">{word}</span>
                     ))}
                   </div>
