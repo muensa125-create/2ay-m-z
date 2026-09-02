@@ -105,11 +105,35 @@ export default function Home() {
   const [showError, setShowError] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [todoItems, setTodoItems] = useState<string[]>([]);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Set mounted state
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Load todo items from localStorage after mount
+  useEffect(() => {
+    if (mounted) {
+      try {
+        const savedTodos = localStorage.getItem('todoItems');
+        if (savedTodos) {
+          setTodoItems(JSON.parse(savedTodos));
+        }
+        setIsInitialLoad(false);
+      } catch (e) {
+        console.error('Failed to load todos:', e);
+        setIsInitialLoad(false);
+      }
+    }
+  }, [mounted]);
+
+  // Save todo items to localStorage whenever they change (but not during initial load)
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    }
+  }, [todoItems, isInitialLoad]);
 
   // Set fixed counter values with live seconds counting
   useEffect(() => {
