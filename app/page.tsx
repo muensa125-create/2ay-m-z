@@ -537,8 +537,8 @@ export default function Home() {
                 <MessageCircle className="text-[#FF6B9D]" size={20} />
                 <h3 className="font-caveat text-lg md:text-xl text-[#F5E6E6]">Toplam Mesaj</h3>
               </div>
-              <div className="text-3xl md:text-4xl font-caveat text-[#FF8E5E] mb-2">1.840+</div>
-              <div className="text-xs md:text-sm text-[#F5E6E6]/60">Günlük Ortalama: ~260 Mesaj</div>
+              <div className="text-3xl md:text-4xl font-caveat text-[#FF8E5E] mb-2">61.680+</div>
+              <div className="text-xs md:text-sm text-[#F5E6E6]/60">Günlük Ortalama: ~1.000 Mesaj</div>
             </div>
 
             {/* Who Wrote More */}
