@@ -548,19 +548,19 @@ export default function Home() {
                 <div>
                   <div className="flex justify-between mb-1">
                     <span className="text-xs md:text-sm">Gülcan</span>
-                    <span className="text-xs md:text-sm font-bold text-[#FF6B9D]">56%</span>
+                    <span className="text-xs md:text-sm font-bold text-[#FF6B9D]">53%</span>
                   </div>
                   <div className="h-3 bg-[#2D1F2F] rounded-full overflow-hidden">
-                    <div className="h-full bg-[#FF6B9D] rounded-full" style={{ width: '56%' }} />
+                    <div className="h-full bg-[#FF6B9D] rounded-full" style={{ width: '53%' }} />
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between mb-1">
                     <span className="text-sm">Said</span>
-                    <span className="text-sm font-bold text-[#FF8E5E]">44%</span>
+                    <span className="text-sm font-bold text-[#FF8E5E]">47%</span>
                   </div>
                   <div className="h-3 bg-[#2D1F2F] rounded-full overflow-hidden">
-                    <div className="h-full bg-[#FF8E5E] rounded-full" style={{ width: '44%' }} />
+                    <div className="h-full bg-[#FF8E5E] rounded-full" style={{ width: '47%' }} />
                   </div>
                 </div>
               </div>
@@ -586,7 +586,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-xs md:text-sm font-bold text-[#FF8E5E] mb-2">Said:</h4>
                   <div className="flex flex-wrap gap-1 md:gap-2">
-                    {['tatlım', 'şapşal', 'su iç', 'öpüyorum', 'kdlcldlc', 'aklım kalıyor', 'ye artık'].map((word, i) => (
+                    {['tatlım', 'şapşal', 'su iç', 'öpüyorum', 'kdlcldlc', 'aklım kalıyor', 'ye artık', 'ikimizede istiyorum'].map((word, i) => (
                       <span key={i} className="bg-[#2D1F2F] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">{word}</span>
                     ))}
                   </div>
@@ -594,7 +594,7 @@ export default function Home() {
                 <div>
                   <h4 className="text-xs md:text-sm font-bold text-[#FF6B9D] mb-2">Gülcan:</h4>
                   <div className="flex flex-wrap gap-1 md:gap-2">
-                    {['askim', 'sapsal', 'acim', 'spora gidiyom', 'hayat bitti', 'tsklerrr', 'yerim seni'].map((word, i) => (
+                    {['askim', 'sapsal', 'acim', 'spora gidiyom', 'hayat bitti', 'tsklerrr', 'yerim seni', 'ikimizede istiyorum'].map((word, i) => (
                       <span key={i} className="bg-[#2D1F2F] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm">{word}</span>
                     ))}
                   </div>
