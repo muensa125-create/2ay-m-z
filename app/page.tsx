@@ -135,34 +135,41 @@ export default function Home() {
     }
   }, [todoItems, isInitialLoad]);
 
-  // Set fixed counter values with live seconds counting
+  // Set fixed counter values with live seconds counting with localStorage persistence
   useEffect(() => {
-    // Initial values: 59 days, 20 hours, 40 minutes, 0 seconds
-    let seconds = 0;
-    let minutes = 40;
-    let hours = 20;
-    let days = 59;
+    // Check if this is the first time loading the counter
+    const isFirstLoad = !localStorage.getItem('counterStartDate');
     
-    // Set initial values immediately
-    setTimeLeft({ days, hours, minutes, seconds });
+    let startDate: Date;
     
-    const interval = setInterval(() => {
-      seconds++;
-      if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-      }
-      if (minutes >= 60) {
-        minutes = 0;
-        hours++;
-      }
-      if (hours >= 24) {
-        hours = 0;
-        days++;
-      }
+    if (isFirstLoad) {
+      // First time: set start date as current time minus the initial offset
+      const now = new Date();
+      const initialOffset = 59 * 24 * 60 * 60 * 1000 + 20 * 60 * 60 * 1000 + 40 * 60 * 1000;
+      startDate = new Date(now.getTime() - initialOffset);
+      localStorage.setItem('counterStartDate', startDate.toISOString());
+    } else {
+      // Subsequent loads: use the saved start date
+      startDate = new Date(localStorage.getItem('counterStartDate')!);
+    }
+    
+    const updateCounter = () => {
+      const now = new Date();
+      const diff = now.getTime() - startDate.getTime();
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
       
       setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
+    };
+    
+    // Update immediately
+    updateCounter();
+    
+    // Update every second
+    const interval = setInterval(updateCounter, 1000);
     
     return () => clearInterval(interval);
   }, []);
